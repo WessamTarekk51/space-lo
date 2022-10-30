@@ -1,0 +1,69 @@
+<ng-container *ngFor="let e of  this.itemJson[0].items">
+  <ng-container *ngIf="e.active">
+    <div class="container-space" [ngClass]="{'active': e.active}">
+
+      <div class="up_label">
+        <!-- <div class="inner_label_1"><p>00000000</p></div> -->
+        <ng-container *ngFor="let up_label of  e.label_up[0].content; let i =index;">
+          <p *ngIf="up_label.parag !=''" innerHTML="{{up_label.parag}}"></p>
+          <input *ngIf="up_label.parag ==''" class="wrong" type="text" [attr.data-index]="i"
+            (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_up"
+            [attr.maxlength]="up_label.Length" [attr.data-i]="0">
+          <p *ngIf="up_label.marker !=''" innerHTML="{{up_label.marker}}"></p>
+        </ng-container>
+      </div>
+      <section>
+        <div id="table">
+          <div class="upper_table">
+
+          </div>
+          <div class="space_man"></div>
+          <div class="body_table">
+            <div class="button_check" (click)="checkanswer()"></div>
+            <div class="inner_table">
+              <ng-container *ngFor="let content of  e.inner_table; let index =index;">
+                <div class="table_question" [ngStyle]="{'width': 'calc(100% / {{e.inner_table.length}})'}">
+                  <ng-container *ngFor="let data of content.content; let i =index;">
+                    <p *ngIf="data.parag !='' && !data.line" innerHTML="{{data.parag}}">
+                    </p>
+                    <input *ngIf="data.parag =='' && !data.line" class="wrong" type="text" [attr.data-index]="i"
+                      (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="inner_table"
+                      [attr.maxlength]="data.Length" [attr.data-i]="index">
+                    <div class="line" *ngIf="data.line">
+                      <span innerHTML="{{data.marker}}"></span>
+                    </div>
+                  </ng-container>
+                  <div class="border_h" *ngIf="e.inner_table.length -1 != index "></div>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="down_label">
+        <!-- <div class="inner_label_1"><p>00000000</p></div> -->
+        <ng-container *ngFor="let down_label of  e.label_down[0].content; let i =index;">
+          <p *ngIf="down_label.parag !=''" innerHTML="{{down_label.parag}}"></p>
+          <input *ngIf="down_label.parag ==''" class="wrong" type="text" [attr.data-index]="i"
+            (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_down"
+            [attr.maxlength]="down_label.Length" [attr.data-i]="0">
+          <p *ngIf="down_label.marker !=''" innerHTML="{{down_label.marker}}"></p>
+        </ng-container>
+      </div>
+      <div *ngIf="question">
+        <div class="nextContent">
+          <div class="character" class="show{{(counter+1)*2}}">
+            <div class="buttons">
+              <button class="next" (click)="nextQuestion()"
+                *ngIf="counter !== this.itemJson[0].items.length-1"></button>
+              <button class="home" (click)="home()"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+</ng-container>

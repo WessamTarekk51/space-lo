@@ -1,0 +1,72 @@
+@import '../assets/style/variables';
+@import '../assets/style/mixins';
+
+.bg {
+  width              : 100%;
+  height             : 100vh;
+  background-position: center;
+  background-repeat  : no-repeat;
+  background-size    : cover;
+  background-image   : $bg-background;
+  @include flex-center;
+  position: relative;
+
+  .music {
+    position         : absolute;
+    left             : 1vh;
+    top              : 1vh;
+    background-size  : contain;
+    width            : 9vh;
+    height           : 9vh;
+    background-repeat: no-repeat;
+    background-image : $music;
+
+    &.mute {
+      background-image: $mute;
+    }
+  }
+
+
+  &::after {
+    content          : '';
+    position         : absolute;
+    color            : white;
+    right            : 0;
+    top              : 1vh;
+    background-image : $logo;
+    background-size  : contain;
+    width            : 9vh;
+    height           : 7vh;
+    background-repeat: no-repeat;
+  }
+
+
+  #start-button {
+    height             : 35vh;
+    width              : 35vh;
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : 100% 100%;
+    background-image   : $but-start-background;
+    animation          : zoom 30s infinite;
+    -webkit-animation  : zoom 2.5s infinite ease-in-out;
+    cursor             : pointer;
+    background-color   : transparent;
+    border             : 0;
+
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+
+  50% {
+    transform: scale(1) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+}

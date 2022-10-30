@@ -1,0 +1,347 @@
+@import '../../assets/style/variables';
+@import '../../assets/style/mixins';
+
+.container-space {
+  display: none;
+
+
+  &.active {
+    @include flex-center;
+    flex-direction: column;
+  }
+
+  .down_label,
+  .up_label {
+    min-width            : 77vh;
+    min-height           : 13vh;
+    background-image : $bg_label_1;
+    background-repeat: no-repeat;
+    background-size  : 100% 100%;
+    @include flex-center;
+    position: relative;
+    padding : 1vh;
+    margin  : 1vh;
+
+    .inner_label_1 {
+      width            : 100%;
+      height           : 100%;
+      background       : $inner_label_1 #680070;
+      background-repeat: no-repeat;
+      background-size  : 100% 100%;
+      @include flex-center;
+      position     : relative;
+      border-radius: 3vh / 7vh;
+      color        : white;
+      text-align   : center;
+      text-indent  : .1em;
+      margin-top   : 0.5vh;
+
+    }
+
+    &:after {
+      content      : '';
+      position     : absolute;
+      right        : 0;
+      left         : 0;
+      margin       : 0 auto;
+      background   : inherit;
+      border-radius: 5%/50%;
+      width        : 95%;
+      height       : 85%;
+      background   : $inner_label_1 #680070;
+    }
+  }
+
+  p {
+    font-size  : 5vh;
+    font-weight: bold;
+    color      : white;
+    z-index    : 1;
+    margin     : 1vh;
+  }
+
+  input {
+    z-index: 1;
+  }
+
+  section {
+    width: 95vw;
+
+    #table {
+      width   : 90%;
+      position: relative;
+
+      .space_man {
+        background-image : $space_man;
+        background-repeat: no-repeat;
+        background-size  : 100% 100%;
+        @include flex-center;
+        width    : 35vh;
+        height   : 20vh;
+        position : absolute;
+        top      : 7%;
+        animation: spacemove 4s infinite;
+        left     : -11vw;
+      }
+
+      @keyframes spacemove {
+        0% {
+          transform: translateY(10px) rotateY(0deg);
+          transform: translateX(10px) rotateY(0deg);
+        }
+
+        50% {
+          transform: translateY(20px) rotateY(5deg);
+
+        }
+
+        100% {
+          transform: translateY(10px) rotateY(0deg);
+          transform: translateX(10px) rotateY(0deg);
+        }
+      }
+
+      .body_table {
+        background-repeat: no-repeat;
+        background-size  : 100% 100%;
+        @include flex-center;
+        background-image   : $body_table;
+        flex-direction     : column;
+        position           : relative;
+        padding            : 1.5vh;
+        z-index            : 10;
+        // overflow        : hidden;
+        height             : 55vh;
+        position           : relative;
+
+        .button_check {
+          @include flex-center;
+          position         : absolute;
+          right            : 5vw;
+          top              : -12vh;
+          background-repeat: no-repeat;
+          background-size  : 100% 100%;
+          width            : 10vh;
+          height           : 13vh;
+          background-image : $button-check;
+          z-index          : 9;
+        }
+
+        .inner_table {
+          // overflow         : hidden;
+          @include flex-center;
+          border-radius    : 8vh 8vh 8vh 8vh;
+          background-image : $inner_table;
+          background-color : #680070;
+          background-repeat: no-repeat;
+          background-size  : 100% 100%;
+          width            : 100%;
+          height           : 100%;
+          justify-content: space-between;
+          .table_question {
+            @include flex-center;
+            flex-direction: column;
+            height        : 100%;
+            // min-width     : 50%;
+            position      : relative;
+
+
+            .line {
+              border-bottom: 0.5vh white solid;
+              width        : 50%;
+              position     : relative;
+
+              span {
+                position   : absolute;
+                left       : 0;
+                top        : -7vh;
+                color      : white;
+                font-weight: bold;
+              }
+            }
+
+            .border_h {
+              background-repeat: no-repeat;
+              background-size  : 100% 100%;
+
+              @include flex-center;
+              width           : 1vh;
+              position        : absolute;
+              left            : 0;
+              height          : 100%;
+              z-index         : 10;
+              background-image: $border_h;
+            }
+
+            p {
+              display        : flex;
+              justify-content: flex-start;
+              align-items    : center;
+              width          : 50%;
+            }
+          }
+
+        }
+
+
+      }
+
+      .upper_table {
+        height: 13vh;
+      }
+    }
+  }
+
+  .nextContent {
+    width           : 100%;
+    height          : 100%;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, .47843);
+    z-index         : 100;
+    display         : none;
+    position        : absolute;
+    top             : 0;
+    left            : 0;
+    justify-content : center;
+    align-items     : center
+  }
+
+  .nextContent {
+    display: flex
+  }
+
+  @-webkit-keyframes fade {
+    from {
+      opacity: 0;
+      width  : 0%;
+      height : 0
+    }
+
+    to {
+      opacity: 1;
+      width  : 50%;
+      height : 35vw
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+      width  : 0%;
+      height : 0
+    }
+
+    to {
+      opacity: 1;
+      width  : 50%;
+      height : 35vw
+    }
+  }
+
+  .nextContent .character {
+    width              : 100vh;
+    height             : 75vh;
+    position           : relative;
+    background-size    : contain;
+    background-position: center center;
+    background-repeat  : no-repeat;
+    animation          : fade .3s linear
+  }
+
+  .nextContent .character.show0 {
+    background-image: $show_0;
+  }
+
+  .nextContent .character.show1 {
+    background-image: $show_1;
+  }
+
+  .nextContent .character.show2 {
+    background-image: $show_2;
+  }
+
+  .nextContent .character.show3 {
+    background-image: $show_3;
+  }
+
+
+  .nextContent .character.show4 {
+    background-image: $show_4;
+  }
+
+  .nextContent .character.show5 {
+    background-image: $show_5;
+  }
+
+  .nextContent .character.show6 {
+    background-image: $show_6;
+  }
+
+  .nextContent .character.show7 {
+    background-image: $show_7;
+  }
+
+  .nextContent .character .buttons {
+    position               : absolute;
+    bottom                 : -2vh;
+    width                  : 40%;
+    height                 : 5vw;
+    right                  : 0;
+    left                   : 0;
+    margin                 : 0 auto;
+    display                : -webkit-box;
+    display                : -webkit-flex;
+    display                : -ms-flexbox;
+    display                : flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack          : distribute;
+    justify-content        : space-around;
+    -webkit-box-align      : center;
+    -webkit-align-items    : center;
+    -ms-flex-align         : center;
+    align-items            : center
+  }
+
+  .nextContent .character .buttons button {
+    width                  : 7vw;
+    height                 : 7vw;
+    -webkit-border-radius  : 50%;
+    border-radius          : 50%;
+    -webkit-background-size: contain;
+    background-size        : contain;
+    background-position    : center center;
+    background-repeat      : no-repeat;
+    border                 : 0;
+    background-color       : transparent
+  }
+
+  .nextContent .character .buttons button:focus {
+    outline: none;
+    opacity: .5
+  }
+
+  .nextContent .character .buttons button.next {
+    background-image: $next;
+  }
+
+  .nextContent .character .buttons button.home {
+    background-image: $home;
+  }
+
+  #appDictionary .border-content {
+    width   : 95%;
+    height  : 100%;
+    position: absolute;
+    right   : 0;
+    left    : 0;
+    bottom  : 0;
+    margin  : 0 auto 0.5%;
+
+    background-repeat      : no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size        : 100%;
+    z-index                : 2;
+    pointer-events         : none;
+    display                : none;
+  }
+}
