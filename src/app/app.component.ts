@@ -21,17 +21,22 @@ export class AppComponent {
   screenClick: number = 0
   getsound!: string;
   sec:any
-  ngOnInit() { }
+
+  ngOnInit() {   console.log(document.querySelectorAll('input').length) }
 
   start(event: any) {
+
     this.startLo = false
     this.bgAudio.src = '/assets/audios/music.mp3'
     this.muteMusic()
     setTimeout(() => {
       this.sound.src = '/assets/audios/Q/Q0.mp3'
       this.sound.play()
+
     }, 1500)
     this.soundPlay()
+
+
   }
 
   soundPlay() {
@@ -58,6 +63,8 @@ export class AppComponent {
     clearInterval(this.setInterval)
     this.screenClick = 0
     this.soundPlay()
+
+
   }
   muteMusic() {
     this.music = !this.music

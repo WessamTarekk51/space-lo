@@ -19,16 +19,17 @@
           </div>
           <div class="space_man"></div>
           <div class="body_table">
-            <div class="button_check" (click)="checkanswer()"></div>
+            <div class="button_check" (click)="checkanswer()"   [ngClass]="e.tryCounter < 2 ? '' : 'disable'"></div>
+            <div class="show_anwser" (click)="show_anwser()"  *ngIf="e.tryCounter > 1"></div>
             <div class="inner_table">
               <ng-container *ngFor="let content of  e.inner_table; let index =index;">
-                <div class="table_question" [ngStyle]="{'width': 'calc(100% / {{e.inner_table.length}})'}">
+                <div class="table_question" [ngStyle]="{'width': 'calc(100% / ' + e.inner_table.length + ')' }">
                   <ng-container *ngFor="let data of content.content; let i =index;">
                     <p *ngIf="data.parag !='' && !data.line" innerHTML="{{data.parag}}">
                     </p>
                     <input *ngIf="data.parag =='' && !data.line" class="wrong" type="text" [attr.data-index]="i"
                       (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="inner_table"
-                      [attr.maxlength]="data.Length" [attr.data-i]="index">
+                      [attr.maxlength]="data.Length" [attr.data-i]="index"  >
                     <div class="line" *ngIf="data.line">
                       <span innerHTML="{{data.marker}}"></span>
                     </div>

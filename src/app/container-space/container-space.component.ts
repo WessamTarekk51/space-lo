@@ -17,7 +17,7 @@ export class ContainerSpaceComponent implements OnInit {
   count: number = 0;
   questionsNumber: number = -1;
   questionNumber: number = 0;
-
+  countInput: number = 0;
   constructor(
     private dataService: SharingDataService,
     private router: Router,
@@ -27,10 +27,12 @@ export class ContainerSpaceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nextQuestion();
     this.dataService.setIndex(this.counter);
     this.questionsNumber = this.dataService.getIndex();
-    this.nextQuestion();
+
     this.maxLength();
+
   }
 
 
@@ -38,24 +40,27 @@ export class ContainerSpaceComponent implements OnInit {
     this.counter += 1;
     this.question = false;
     this.questionsNumber = this.itemJson[0].items.length;
-
     if (this.questionsNumber != this.counter) {
       this.itemJson[0].items.forEach((element) => {
         element.active = false;
       });
       this.itemJson[0].items[this.counter].active = true;
     }
-
-
+    console.log(this.itemJson[0].items)
   }
 
 
 
 
   maxLength() {
-    this.itemJson[0].items.forEach((elem) => {
+    this.itemJson[0].items.forEach((elem, i) => {
       elem.label_up[0].content.forEach((element) => {
+
         let mLength = 0;
+        if (element.parag == '') {
+          this.itemJson[0].numberOfquestion++
+          elem.numberOfquestion++
+        }
         element.input.valid.forEach((elem: string | any[]) => {
           if (mLength < elem.length) {
             mLength = elem.length;
@@ -64,9 +69,13 @@ export class ContainerSpaceComponent implements OnInit {
         });
       });
     })
-    this.itemJson[0].items.forEach((elem) => {
+    this.itemJson[0].items.forEach((elem, i) => {
       elem.inner_table.forEach((ele) => {
         ele.content.forEach((element) => {
+          if (element.parag == '' && !element.line) {
+            this.itemJson[0].numberOfquestion++
+            elem.numberOfquestion++
+          }
           let tLength = 0;
           element.input.valid.forEach((elem: string | any[]) => {
             console.log(tLength)
@@ -78,8 +87,12 @@ export class ContainerSpaceComponent implements OnInit {
         });
       });
     })
-    this.itemJson[0].items.forEach((elem) => {
+    this.itemJson[0].items.forEach((elem, i) => {
       elem.label_down[0].content.forEach((element) => {
+        if (element.parag == '') {
+          this.itemJson[0].numberOfquestion++
+          elem.numberOfquestion++
+        }
         let mLength = 0;
         element.input.valid.forEach((elem: string | any[]) => {
           if (mLength < elem.length) {
@@ -89,16 +102,33 @@ export class ContainerSpaceComponent implements OnInit {
         });
       });
     })
+
+
+
+    console.log("numberOfquestion = " + this.itemJson[0].numberOfquestion)
+
   }
 
 
   itemJson: jsonFile[] = [
     {
+      counterCorrect: 0,
+      LODegree: null,
+      UserDegree: null,
+      type: "",
+      BloomTargets: [""],
+      randomNumber: null,
+      loTargets: null,
+      numberOfquestion: 0,
+
       location_value: '',
       items: [
         {
           active: true,
           id: 1,
+          counterCorrect: 0,
+          numberOfquestion: 0,
+          tryCounter: 0,
           label_up: [
             {
               content: [
@@ -235,6 +265,148 @@ export class ContainerSpaceComponent implements OnInit {
             }
 
           ],
+        }, {
+          active: false,
+          id: 1,
+          counterCorrect: 0,
+          numberOfquestion: 0,
+          tryCounter: 0,
+          label_up: [
+            {
+              content: [
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['11'] },
+                  marker: '=',
+                }, {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['2'] },
+                  marker: '÷',
+
+                }, {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['33'] },
+                  marker: '',
+
+                }
+              ]
+            }
+
+          ],
+          inner_table: [
+            {
+              content: [
+                {
+                  parag: "350",
+                  Length: 0,
+                  input: { valid: [''] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['1'] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['2'] },
+                  marker: "-",
+                  line: true
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['3'] },
+                  marker: "-",
+                  line: false
+                }
+              ]
+            }, {
+              content: [
+                {
+                  parag: "350",
+                  Length: 0,
+                  input: { valid: [''] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['4'] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['5'] },
+                  marker: "-",
+                  line: true
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['6'] },
+                  marker: "-",
+                  line: false
+                }
+              ]
+            }, {
+              content: [
+                {
+                  parag: "350",
+                  Length: 0,
+                  input: { valid: [''] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['4'] },
+                  marker: "−",
+                  line: false
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['5'] },
+                  marker: "-",
+                  line: true
+                }, {
+                  parag: "",
+                  Length: 0,
+                  input: { valid: ['6'] },
+                  marker: "-",
+                  line: false
+                }
+              ]
+            }
+          ], label_down: [
+            {
+              content: [
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['1'] },
+                  marker: '=',
+                }, {
+                  parag: '2',
+                  Length: 0,
+                  input: { valid: ['2'] },
+                  marker: '÷',
+
+                }, {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['3'] },
+                  marker: '',
+
+                }
+              ]
+            }
+
+          ],
         }
       ],
     },
@@ -250,16 +422,15 @@ export class ContainerSpaceComponent implements OnInit {
     document.querySelectorAll('.false').forEach((el) => {
       el.classList.remove('false');
     });
+    console.log(this.itemJson[0].items)
   }
 
   checkvalue(event: any, element: any) {
     let data_att = event.target.getAttribute('data-index');
     let data_i = event.target.getAttribute('data-i');
     const trueValue = element[this.itemJson[0].location_value][data_i].content[data_att].input.valid[0];
-    // const trueValue = element.label_up[data_att].input.valid[0];
     console.log(trueValue)
     let maxLength = trueValue.length;
-    // console.log(event.target.value)
     if (event.target.value == null) {
       event.target.classList.add('wrong');
       event.target.classList.remove('right');
@@ -285,11 +456,41 @@ export class ContainerSpaceComponent implements OnInit {
       elem.classList.remove('false');
       elem.classList.add('true');
       this.count += 1;
+
     });
+
+    this.itemJson[0].items[this.counter].counterCorrect = this.count
+    this.itemJson[0].items[this.counter].tryCounter++
+
+
     this.falseBox = document.querySelectorAll('.active .wrong');
-    this.falseBox.forEach((elem: any) => {
-      elem.classList.remove('true');
-      elem.classList.add('false');
+    this.falseBox.forEach((el: any) => {
+      el.classList.remove('true');
+      el.classList.add('false');
+      if(this.itemJson[0].items[this.counter].tryCounter == 2){
+        el.classList.add('show');
+
+        // this.itemJson[0].items.forEach((elem, i) => {
+        //   elem.label_up[0].content.forEach((element) => {
+
+        //     let mLength = 0;
+        //     if (element.parag == '') {
+        //       this.itemJson[0].numberOfquestion++
+        //       elem.numberOfquestion++
+        //     }
+        //     element.input.valid.forEach((elem: string | any[]) => {
+        //       if (mLength < elem.length) {
+        //         mLength = elem.length;
+        //         element.Length = mLength;
+        //       }
+        //     });
+        //   });
+        // })
+
+
+      }
+
+
     });
 
 
@@ -306,6 +507,8 @@ export class ContainerSpaceComponent implements OnInit {
     //     this.question = true;
     //   }, 4000)) : this.wrongAnswer.play() : false
     // );
+
+    console.log(this.itemJson[0].items);
   }
 
 
@@ -314,6 +517,8 @@ export class ContainerSpaceComponent implements OnInit {
     // this.clickBtn.play()
     location.reload()
   }
+  show_anwser() {
 
+  }
 
 }
