@@ -2,14 +2,14 @@
   <ng-container *ngIf="e.active">
     <div class="container-space" [ngClass]="{'active': e.active}">
 
-      <div class="up_label">
+      <div class="up_label ">
         <!-- <div class="inner_label_1"><p>00000000</p></div> -->
-        <ng-container *ngFor="let up_label of  e.label_up[0].content; let i =index;">
-          <p *ngIf="up_label.parag !=''" innerHTML="{{up_label.parag}}"></p>
-          <input *ngIf="up_label.parag ==''" class="wrong" type="text" [attr.data-index]="i"
+        <ng-container *ngFor="let data of  e.label_up[0].content; let i =index;">
+          <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
+          <input *ngIf="data.parag ==''" class="wrong" type="text" [attr.data-index]="i"
             (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_up"
-            [attr.maxlength]="up_label.Length" [attr.data-i]="0">
-          <p *ngIf="up_label.marker !=''" innerHTML="{{up_label.marker}}"></p>
+            [attr.maxlength]="data.Length" [attr.data-i]="0" [attr.placeholder]="data.input.show" >
+          <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>
       </div>
       <section>
@@ -19,8 +19,8 @@
           </div>
           <div class="space_man"></div>
           <div class="body_table">
-            <div class="button_check" (click)="checkanswer()"   [ngClass]="e.tryCounter < 2 ? '' : 'disable'"></div>
-            <div class="show_anwser" (click)="show_anwser()"  *ngIf="e.tryCounter > 1"></div>
+            <div class="button_check" (click)="checkanswer()" [ngClass]="e.tryCounter < 2 ? '' : 'disable'"></div>
+            <div class="show_anwser" (click)="show_anwser()" *ngIf="e.tryCounter > 1"></div>
             <div class="inner_table">
               <ng-container *ngFor="let content of  e.inner_table; let index =index;">
                 <div class="table_question" [ngStyle]="{'width': 'calc(100% / ' + e.inner_table.length + ')' }">
@@ -29,7 +29,7 @@
                     </p>
                     <input *ngIf="data.parag =='' && !data.line" class="wrong" type="text" [attr.data-index]="i"
                       (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="inner_table"
-                      [attr.maxlength]="data.Length" [attr.data-i]="index"  >
+                      [attr.maxlength]="data.Length" [attr.data-i]="index"  [attr.placeholder]="data.input.show">
                     <div class="line" *ngIf="data.line">
                       <span innerHTML="{{data.marker}}"></span>
                     </div>
@@ -37,19 +37,18 @@
                   <div class="border_h" *ngIf="e.inner_table.length -1 != index "></div>
                 </div>
               </ng-container>
-
             </div>
           </div>
         </div>
       </section>
       <div class="down_label">
         <!-- <div class="inner_label_1"><p>00000000</p></div> -->
-        <ng-container *ngFor="let down_label of  e.label_down[0].content; let i =index;">
-          <p *ngIf="down_label.parag !=''" innerHTML="{{down_label.parag}}"></p>
-          <input *ngIf="down_label.parag ==''" class="wrong" type="text" [attr.data-index]="i"
+        <ng-container *ngFor="let data of  e.label_down[0].content; let i =index;">
+          <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
+          <input *ngIf="data.parag ==''" class="wrong" type="text" [attr.data-index]="i"
             (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_down"
-            [attr.maxlength]="down_label.Length" [attr.data-i]="0">
-          <p *ngIf="down_label.marker !=''" innerHTML="{{down_label.marker}}"></p>
+            [attr.maxlength]="data.Length" [attr.data-i]="0"   [attr.placeholder]="data.input.show">
+          <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>
       </div>
       <div *ngIf="question">

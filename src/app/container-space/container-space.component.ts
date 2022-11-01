@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, NgModule, OnInit } from '@angular/core';
 import { jsonFile } from '../typings';
 import { SharingDataService } from '../sharing-data.service';
 import { Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: './container-space.component.html',
   styleUrls: ['./container-space.component.scss']
 })
+
+
 export class ContainerSpaceComponent implements OnInit {
   question: boolean = false;
   counter: number = -1;
@@ -18,6 +20,7 @@ export class ContainerSpaceComponent implements OnInit {
   questionsNumber: number = -1;
   questionNumber: number = 0;
   countInput: number = 0;
+
   constructor(
     private dataService: SharingDataService,
     private router: Router,
@@ -46,6 +49,7 @@ export class ContainerSpaceComponent implements OnInit {
       });
       this.itemJson[0].items[this.counter].active = true;
     }
+
     console.log(this.itemJson[0].items)
   }
 
@@ -61,7 +65,7 @@ export class ContainerSpaceComponent implements OnInit {
           this.itemJson[0].numberOfquestion++
           elem.numberOfquestion++
         }
-        element.input.valid.forEach((elem: string | any[]) => {
+        element.input.valid.forEach((elem: any) => {
           if (mLength < elem.length) {
             mLength = elem.length;
             element.Length = mLength;
@@ -135,18 +139,18 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['1'] },
+                  input: { valid: ['1'], show: [''] },
                   marker: '=',
                 }, {
                   parag: '2',
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: '÷',
 
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['3'] },
+                  input: { valid: ['3'], show: [''] },
                   marker: '',
 
                 }
@@ -160,25 +164,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['1'] },
+                  input: { valid: ['1'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['3'] },
+                  input: { valid: ['3'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -188,25 +192,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['4'] },
+                  input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['5'] },
+                  input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['6'] },
+                  input: { valid: ['6'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -216,25 +220,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['4'] },
+                  input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['5'] },
+                  input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['6'] },
+                  input: { valid: ['6'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -246,18 +250,18 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['1'] },
+                  input: { valid: ['1'], show: [''] },
                   marker: '=',
                 }, {
                   parag: '2',
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: '÷',
 
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['3'] },
+                  input: { valid: ['3'], show: [''] },
                   marker: '',
 
                 }
@@ -277,18 +281,18 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['11'] },
+                  input: { valid: ['11'], show: [''] },
                   marker: '=',
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: '÷',
 
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['33'] },
+                  input: { valid: ['33'], show: [''] },
                   marker: '',
 
                 }
@@ -302,25 +306,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['1'] },
+                  input: { valid: ['1'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['3'] },
+                  input: { valid: ['3'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -330,25 +334,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['4'] },
+                  input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['5'] },
+                  input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['6'] },
+                  input: { valid: ['6'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -358,25 +362,25 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: "350",
                   Length: 0,
-                  input: { valid: [''] },
+                  input: { valid: [''], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['4'] },
+                  input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['5'] },
+                  input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
                   parag: "",
                   Length: 0,
-                  input: { valid: ['6'] },
+                  input: { valid: ['6'], show: [''] },
                   marker: "-",
                   line: false
                 }
@@ -388,18 +392,18 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['1'] },
+                  input: { valid: ['1'], show: [''] },
                   marker: '=',
                 }, {
                   parag: '2',
                   Length: 0,
-                  input: { valid: ['2'] },
+                  input: { valid: ['2'], show: [''] },
                   marker: '÷',
 
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['3'] },
+                  input: { valid: ['3'], show: [''] },
                   marker: '',
 
                 }
@@ -464,33 +468,33 @@ export class ContainerSpaceComponent implements OnInit {
 
 
     this.falseBox = document.querySelectorAll('.active .wrong');
+
+
     this.falseBox.forEach((el: any) => {
       el.classList.remove('true');
       el.classList.add('false');
-      if(this.itemJson[0].items[this.counter].tryCounter == 2){
+      if (this.itemJson[0].items[this.counter].tryCounter == 2) {
         el.classList.add('show');
+        this.itemJson[0].items.forEach((elem, i) => {
+          elem.label_up.forEach((elementup , i) => {
+            elementup.content.forEach((element) => {
+              element.input.show  = element.input.valid
+            });
 
-        // this.itemJson[0].items.forEach((elem, i) => {
-        //   elem.label_up[0].content.forEach((element) => {
+          });
+          elem.inner_table.forEach((elementtable , i) => {
+            elementtable.content.forEach((element) => {
+              element.input.show  = element.input.valid
+            });
 
-        //     let mLength = 0;
-        //     if (element.parag == '') {
-        //       this.itemJson[0].numberOfquestion++
-        //       elem.numberOfquestion++
-        //     }
-        //     element.input.valid.forEach((elem: string | any[]) => {
-        //       if (mLength < elem.length) {
-        //         mLength = elem.length;
-        //         element.Length = mLength;
-        //       }
-        //     });
-        //   });
-        // })
-
-
+          });
+          elem.label_down.forEach((elementdown , i) => {
+            elementdown.content.forEach((element) => {
+              element.input.show  = element.input.valid
+            });
+          });
+        })
       }
-
-
     });
 
 

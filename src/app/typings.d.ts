@@ -45,7 +45,8 @@ export interface inner_table {
 }
 
 export interface valid {
-  valid: string[]
+  valid: any
+  show:string[]
 }
 
 
