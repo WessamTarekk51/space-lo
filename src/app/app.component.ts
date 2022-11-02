@@ -42,9 +42,9 @@ export class AppComponent {
   soundPlay() {
     this.sound.addEventListener('loadedmetadata', (event) => {
 
-      console.log(this.sound.duration)
+      // console.log(this.sound.duration)
       this.sec=this.sound.duration + 18
-      console.log(Math.floor(this.sec))
+      // console.log(Math.floor(this.sec))
 
 
     });

@@ -20,6 +20,14 @@ export class ContainerSpaceComponent implements OnInit {
   questionsNumber: number = -1;
   questionNumber: number = 0;
   countInput: number = 0;
+  showNext: boolean = false;
+  helpHand: any;
+  checkBtn: number = 0;
+  chackInput: any;
+  guideCheck: boolean = false;
+  guideAnwser: boolean = false;
+  guidenext: boolean = false;
+
 
   constructor(
     private dataService: SharingDataService,
@@ -36,6 +44,7 @@ export class ContainerSpaceComponent implements OnInit {
 
     this.maxLength();
 
+
   }
 
 
@@ -49,8 +58,9 @@ export class ContainerSpaceComponent implements OnInit {
       });
       this.itemJson[0].items[this.counter].active = true;
     }
+    // console.log(this.itemJson[0].items)
 
-    console.log(this.itemJson[0].items)
+
   }
 
 
@@ -82,7 +92,7 @@ export class ContainerSpaceComponent implements OnInit {
           }
           let tLength = 0;
           element.input.valid.forEach((elem: string | any[]) => {
-            console.log(tLength)
+
             if (tLength < elem.length) {
               tLength = elem.length;
               element.Length = tLength;
@@ -109,8 +119,17 @@ export class ContainerSpaceComponent implements OnInit {
 
 
 
-    console.log("numberOfquestion = " + this.itemJson[0].numberOfquestion)
-
+    // console.log("numberOfquestion = " + this.itemJson[0].numberOfquestion)
+    setTimeout(() => {
+      this.helpHand = document.querySelectorAll('.dataInput .help');
+      let count = 0;
+      this.helpHand.forEach((el: any) => {
+        count++
+        if (count != 1) {
+          el.classList.remove('help');
+        }
+      })
+    });
   }
 
 
@@ -132,7 +151,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          tryCounter: 0,
+          numOfAttempts: 0,
           label_up: [
             {
               content: [
@@ -274,7 +293,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          tryCounter: 0,
+          numOfAttempts: 0,
           label_up: [
             {
               content: [
@@ -421,12 +440,34 @@ export class ContainerSpaceComponent implements OnInit {
   foucs(event: any) {
     // this.clickBtn.play()
     this.itemJson[0].location_value = event.target.getAttribute('location-value')
-    console.log(event.target.getAttribute('location-value'))
     event.target.classList.remove('false');
     document.querySelectorAll('.false').forEach((el) => {
       el.classList.remove('false');
     });
-    console.log(this.itemJson[0].items)
+
+    this.helpHand = document.querySelectorAll('.help');
+    this.helpHand.forEach((el: any) => {
+      el.classList.remove('help');
+    })
+
+    // console.log(this.itemJson[0].items)
+  }
+  foucsOut(event: any) {
+    const but = document.querySelectorAll('div .button_check');
+
+    this.checkBtn = 0
+    this.chackInput = document.querySelectorAll('input');
+    this.chackInput.forEach((elem: any) => {
+      elem.value == '' ? this.checkBtn++ : false;
+    });
+
+    if (this.checkBtn == 0) {
+      this.guideCheck = true;
+      but.forEach((elem: any) => {
+        elem.classList.add('enable');
+      });
+      console.log("checkBtn = " + this.checkBtn)
+    }
   }
 
   checkvalue(event: any, element: any) {
@@ -450,69 +491,56 @@ export class ContainerSpaceComponent implements OnInit {
         console.log('the value ture');
       }
     }
+
   }
 
   checkanswer() {
     // this.clickBtn.play()
-    this.count = 0;
-    this.rightBox = document.querySelectorAll('.active .right');
-    this.rightBox.forEach((elem: any) => {
-      elem.classList.remove('false');
-      elem.classList.add('true');
-      this.count += 1;
-
+    this.checkBtn = 0
+    this.chackInput = document.querySelectorAll('input');
+    this.chackInput.forEach((elem: any) => {
+      elem.value == '' ? this.checkBtn++ : false;
     });
 
-    this.itemJson[0].items[this.counter].counterCorrect = this.count
-    this.itemJson[0].items[this.counter].tryCounter++
+    if (this.checkBtn == 0) {
+      this.guideCheck = false
+      this.count = 0;
+      this.rightBox = document.querySelectorAll('.active .right');
+      this.rightBox.forEach((elem: any) => {
+        elem.classList.remove('false');
+        elem.classList.add('true');
+        this.count += 1;
 
+      });
 
-    this.falseBox = document.querySelectorAll('.active .wrong');
+      this.itemJson[0].items[this.counter].counterCorrect = this.count
+      this.itemJson[0].items[this.counter].numOfAttempts++
+      this.falseBox = document.querySelectorAll('.active .wrong');
 
+      this.falseBox.forEach((el: any) => {
+        el.classList.remove('true');
+        el.classList.add('false');
 
-    this.falseBox.forEach((el: any) => {
-      el.classList.remove('true');
-      el.classList.add('false');
-      if (this.itemJson[0].items[this.counter].tryCounter == 2) {
-        el.classList.add('show');
-        this.itemJson[0].items.forEach((elem, i) => {
-          elem.label_up.forEach((elementup , i) => {
-            elementup.content.forEach((element) => {
-              element.input.show  = element.input.valid
-            });
+      });
 
-          });
-          elem.inner_table.forEach((elementtable , i) => {
-            elementtable.content.forEach((element) => {
-              element.input.show  = element.input.valid
-            });
+      let input_count = document.querySelectorAll('input').length;
 
-          });
-          elem.label_down.forEach((elementdown , i) => {
-            elementdown.content.forEach((element) => {
-              element.input.show  = element.input.valid
-            });
-          });
-        })
+      if (this.count === input_count) {
+        setTimeout(() => {
+          this.question = true;
+        }, 2500);
       }
-    });
 
+      // this.itemJson[0].items.filter((el) =>
+      //   el.active ? el.content.length === this.count ? (this.rightAnswer.play(), this.feedback = !this.question, setTimeout(() => {
+      //     this.question = true;
+      //   }, 4000)) : this.wrongAnswer.play() : false
+      // );
 
-    let input_count = document.querySelectorAll('input').length;
-    console.log(this.count);
-    if (this.count === input_count) {
-      setTimeout(() => {
-        this.question = true;
-      }, 2500);
+      // console.log(this.itemJson[0].items);
+
     }
 
-    // this.itemJson[0].items.filter((el) =>
-    //   el.active ? el.content.length === this.count ? (this.rightAnswer.play(), this.feedback = !this.question, setTimeout(() => {
-    //     this.question = true;
-    //   }, 4000)) : this.wrongAnswer.play() : false
-    // );
-
-    console.log(this.itemJson[0].items);
   }
 
 
@@ -521,8 +549,34 @@ export class ContainerSpaceComponent implements OnInit {
     // this.clickBtn.play()
     location.reload()
   }
-  show_anwser() {
-
+  show_anwser(event: any) {
+    // console.log(this.showNext)
+    this.guideAnwser = false
+    this.falseBox = document.querySelectorAll('.active .wrong');
+    this.falseBox.forEach((el: any) => {
+      el.classList.contains("wrong") ? [el.classList.add('show'), el.value = ''] : console.log();
+      this.itemJson[0].items.forEach((elem, i) => {
+        elem.label_up.forEach((elementup, i) => {
+          elementup.content.forEach((element) => {
+            element.input.show = element.input.valid
+          });
+        });
+        elem.inner_table.forEach((elementtable, i) => {
+          elementtable.content.forEach((element) => {
+            element.input.show = element.input.valid
+          });
+        });
+        elem.label_down.forEach((elementdown, i) => {
+          elementdown.content.forEach((element) => {
+            element.input.show = element.input.valid
+          });
+        });
+      })
+    });
+    event.target.classList.add('disable');
   }
+  show_next(event: any) {
+    event.target.classList.add('disable');
+   }
 
 }

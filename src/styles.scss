@@ -31,6 +31,7 @@ input {
   max-width        : 20vh;
   outline          : none;
   color            : white;
+  position         : relative;
 
   &.false {
     background-image: $input_wrong;
@@ -43,10 +44,50 @@ input {
     }
   }
 
+  &.show {
+    background-image: $input_wrong_show;
+  }
+
+
+
 }
+
+.dataInput {
+  position: relative;
+
+  .help {
+    width              : 5vw;
+    height             : 6vw;
+    background-image   : $hand;
+    z-index            : 1;
+    position           : absolute;
+    left               : 12vw;
+    top                : -2vw;
+    background-size    : 100% 100%;
+    background-position: center;
+    background-repeat  : no-repeat;
+    transform          : rotate(-114deg);
+    animation          : submit .5s linear .2s infinite alternate;
+  }
+
+
+  @keyframes submit {
+    from {
+      bottom: 12vw;
+      left  : 10vw
+    }
+
+    to {
+      bottom: -2vw;
+      left  : 9vw
+    }
+  }
+}
+
 
 * {
   box-sizing: border-box;
   margin    : 0;
   direction : rtl;
+
 }

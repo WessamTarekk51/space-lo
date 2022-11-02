@@ -22,7 +22,7 @@ export interface value {
   label_down: content[]
   counterCorrect: number,
   numberOfquestion: number,
-  tryCounter: number,
+  numOfAttempts: number,
 }
 export interface content {
   content: content_table[]

@@ -5,6 +5,8 @@
   display: none;
 
 
+
+
   &.active {
     @include flex-center;
     flex-direction: column;
@@ -73,12 +75,6 @@
       font-weight: bold;
       opacity    : 1;
       color      : black;
-
-    }
-    &.showVal {
-      input::placeholder {
-        visibility: visible;
-      }
     }
   }
 
@@ -86,7 +82,7 @@
 
 
 
-  section {
+  .center {
     width: 95vw;
 
     #table {
@@ -127,15 +123,14 @@
         background-repeat: no-repeat;
         background-size  : 100% 100%;
         @include flex-center;
-        background-image   : $body_table;
-        flex-direction     : column;
-        position           : relative;
-        padding            : 1.5vh;
-        z-index            : 10;
-        // overflow        : hidden;
-        height             : 55vh;
-        position           : relative;
+        background-image: $body_table;
+        flex-direction  : column;
+        position        : relative;
+        padding         : 1.5vh;
+        z-index         : 10;
+        height          : 55vh;
 
+        .show_next,
         .show_anwser,
         .button_check {
           @include flex-center;
@@ -146,16 +141,60 @@
           background-size  : 100% 100%;
           width            : 10vh;
           height           : 13vh;
-          background-image : $button-check;
+          background-image : $next_q_show;
           z-index          : 9;
 
-          &.disable {
-            opacity: .5;
+          &.enable {
+            background-image: $button-check;
+          }
+
+          .button {
+            position: relative;
+
+            &::after {
+              content            : '';
+              width              : 5vw;
+              height             : 6vw;
+              background-image   : $hand;
+              z-index            : 1;
+              position           : absolute;
+              left               : 0vw;
+              top                : -5vw;
+              background-size    : 100% 100%;
+              background-position: center;
+              background-repeat  : no-repeat;
+              transform          : rotate(-114deg);
+              animation          : button_check .5s linear .2s infinite alternate;
+
+            }
+          }
+
+
+          @keyframes button_check {
+            from {
+              bottom: 12vw;
+              left  : 4vw
+            }
+
+            to {
+              bottom: -2vw;
+              left  : 3vw
+            }
+          }
+
+        }
+        .button_check {
+          &.disable{
+            background-image : $next_q_show;
           }
         }
-
         .show_anwser {
           right: 14vw;
+        }
+
+        .show_next {
+          right           : 50vw;
+          background-image: $next_q_show;
         }
 
         .inner_table {

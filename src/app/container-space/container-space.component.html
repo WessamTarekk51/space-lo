@@ -3,33 +3,47 @@
     <div class="container-space" [ngClass]="{'active': e.active}">
 
       <div class="up_label ">
-        <!-- <div class="inner_label_1"><p>00000000</p></div> -->
+
         <ng-container *ngFor="let data of  e.label_up[0].content; let i =index;">
           <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
-          <input *ngIf="data.parag ==''" class="wrong" type="text" [attr.data-index]="i"
-            (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_up"
-            [attr.maxlength]="data.Length" [attr.data-i]="0" [attr.placeholder]="data.input.show" >
+          <div *ngIf="data.parag ==''" class="dataInput">
+            <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e);  "
+              (focus)="foucs($event)" (focusout)="foucsOut($event)" location-value="label_up" [attr.maxlength]="data.Length" [attr.data-i]="0"
+              [attr.placeholder]="data.input.show">
+            <div class="help"></div>
+          </div>
           <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>
       </div>
-      <section>
+      <div class="center">
         <div id="table">
           <div class="upper_table">
 
           </div>
           <div class="space_man"></div>
           <div class="body_table">
-            <div class="button_check" (click)="checkanswer()" [ngClass]="e.tryCounter < 2 ? '' : 'disable'"></div>
-            <div class="show_anwser" (click)="show_anwser()" *ngIf="e.tryCounter > 1"></div>
+            <div class="button_check " (click)="checkanswer();" [ngClass]="e.numOfAttempts < 3 ? '' : 'disable'">
+              <div class="button" *ngIf="guideCheck"></div>
+            </div>
+            <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts > 2">
+              <div class="button" *ngIf="!guideAnwser"></div>
+            </div>
+            <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext" *ngIf="showNext">
+              <div class="button" *ngIf="!guidenext"></div>
+            </div>
             <div class="inner_table">
               <ng-container *ngFor="let content of  e.inner_table; let index =index;">
                 <div class="table_question" [ngStyle]="{'width': 'calc(100% / ' + e.inner_table.length + ')' }">
                   <ng-container *ngFor="let data of content.content; let i =index;">
                     <p *ngIf="data.parag !='' && !data.line" innerHTML="{{data.parag}}">
                     </p>
-                    <input *ngIf="data.parag =='' && !data.line" class="wrong" type="text" [attr.data-index]="i"
-                      (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="inner_table"
-                      [attr.maxlength]="data.Length" [attr.data-i]="index"  [attr.placeholder]="data.input.show">
+                    <div *ngIf="data.parag =='' && !data.line" class="dataInput">
+                      <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
+                        (focus)="foucs($event)" (focusout)="foucsOut($event)" location-value="inner_table" [attr.maxlength]="data.Length"
+                        [attr.data-i]="index" [attr.placeholder]="data.input.show">
+                      <div class="help"></div>
+                    </div>
+
                     <div class="line" *ngIf="data.line">
                       <span innerHTML="{{data.marker}}"></span>
                     </div>
@@ -40,14 +54,17 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
       <div class="down_label">
         <!-- <div class="inner_label_1"><p>00000000</p></div> -->
         <ng-container *ngFor="let data of  e.label_down[0].content; let i =index;">
           <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
-          <input *ngIf="data.parag ==''" class="wrong" type="text" [attr.data-index]="i"
-            (change)="checkvalue($event,e)" (focus)="foucs($event)" location-value="label_down"
-            [attr.maxlength]="data.Length" [attr.data-i]="0"   [attr.placeholder]="data.input.show">
+          <div *ngIf="data.parag ==''" class="dataInput">
+            <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
+              (focus)="foucs($event)" (focusout)="foucsOut($event)" location-value="label_down" [attr.maxlength]="data.Length" [attr.data-i]="0"
+              [attr.placeholder]="data.input.show">
+            <div class="help"></div>
+          </div>
           <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>
       </div>
