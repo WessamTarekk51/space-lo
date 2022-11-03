@@ -10,7 +10,7 @@
             <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e);  "
               (focus)="foucs($event)" (focusout)="foucsOut($event)" location-value="label_up" [attr.maxlength]="data.Length" [attr.data-i]="0"
               [attr.placeholder]="data.input.show">
-            <<div class="help" *ngIf="i == 0"></div>
+            <div class="help" *ngIf="i == 0"></div>
           </div>
           <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>

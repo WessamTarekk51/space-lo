@@ -538,7 +538,6 @@ export class ContainerSpaceComponent implements OnInit {
       // );
 
       // console.log(this.itemJson[0].items);
-
     }
 
   }
