@@ -129,7 +129,7 @@ export class ContainerSpaceComponent implements OnInit {
           el.classList.remove('help');
         }
       })
-    });
+    },1);
   }
 
 
@@ -151,7 +151,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          numOfAttempts: 0,
+          numOfAttempts: 3,
           label_up: [
             {
               content: [
@@ -293,7 +293,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          numOfAttempts: 0,
+          numOfAttempts: 3,
           label_up: [
             {
               content: [
@@ -514,7 +514,7 @@ export class ContainerSpaceComponent implements OnInit {
       });
 
       this.itemJson[0].items[this.counter].counterCorrect = this.count
-      this.itemJson[0].items[this.counter].numOfAttempts++
+      this.itemJson[0].items[this.counter].numOfAttempts--
       this.falseBox = document.querySelectorAll('.active .wrong');
 
       this.falseBox.forEach((el: any) => {

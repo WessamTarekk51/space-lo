@@ -184,6 +184,9 @@
 
         }
         .button_check {
+          p{
+            padding-left: 14vh;
+          }
           &.disable{
             background-image : $next_q_show;
           }
