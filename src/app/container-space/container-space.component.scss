@@ -20,6 +20,7 @@
     background-repeat: no-repeat;
     background-size  : 100% 100%;
     @include flex-center;
+    @include d-ltr;
     position: relative;
     padding : 1vh;
     margin  : 1vh;
@@ -37,7 +38,7 @@
       text-align   : center;
       text-indent  : .1em;
       margin-top   : 0.5vh;
-
+      @include d-ltr;
     }
 
     &:after {

@@ -4,3 +4,10 @@
   justify-content: center;
   align-items: center;
 }
+@mixin d-ltr{
+  direction: ltr;
+}
+@mixin d-rtl{
+  direction: rtl;
+}
+

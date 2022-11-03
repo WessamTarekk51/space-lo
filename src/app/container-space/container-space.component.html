@@ -1,6 +1,6 @@
 <ng-container *ngFor="let e of  this.itemJson[0].items">
   <ng-container *ngIf="e.active">
-    <div class="container-space" [ngClass]="{'active': e.active}">
+    <div class="container-space" [ngClass]="{'active': e.active}" (click)="setupdate($event)">
 
       <div class="up_label ">
 
@@ -22,15 +22,18 @@
           </div>
           <div class="space_man"></div>
           <div class="body_table">
+
             <div class="button_check " (click)="checkanswer();" [ngClass]="e.numOfAttempts == 0 ? '' : 'disable'">
               <div class="button" *ngIf="guideCheck"></div>
               <p>{{e.numOfAttempts}}</p>
             </div>
-            <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts < 1">
-              <div class="button" *ngIf="!guideAnwser"></div>
+            <!-- <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts < 1"> -->
+            <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" >
+              <!-- <div class="button" *ngIf="!guideAnwser"></div> -->
             </div>
-            <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext" *ngIf="showNext">
-              <div class="button" *ngIf="!guidenext"></div>
+            <!-- <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext" *ngIf="showNext"> -->
+            <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext">
+              <!-- <div class="button" *ngIf="!guidenext"></div> -->
             </div>
             <div class="inner_table">
               <ng-container *ngFor="let content of  e.inner_table; let index =index;">

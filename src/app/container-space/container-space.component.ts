@@ -44,9 +44,11 @@ export class ContainerSpaceComponent implements OnInit {
 
     this.maxLength();
 
-
   }
 
+  onBlur(): void {
+    console.log('Focus Is Lost for this Element');
+  }
 
   nextQuestion() {
     this.counter += 1;
@@ -129,7 +131,7 @@ export class ContainerSpaceComponent implements OnInit {
           el.classList.remove('help');
         }
       })
-    },1);
+    }, 1);
   }
 
 
@@ -159,17 +161,17 @@ export class ContainerSpaceComponent implements OnInit {
                   parag: '',
                   Length: 0,
                   input: { valid: ['1'], show: [''] },
-                  marker: '=',
+                  marker: '÷',
                 }, {
                   parag: '2',
                   Length: 0,
                   input: { valid: ['2'], show: [''] },
-                  marker: '÷',
+                  marker: '=',
 
                 }, {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['3'], show: [''] },
+                  input: { valid: ['3', '5'], show: [''] },
                   marker: '',
 
                 }
@@ -473,25 +475,25 @@ export class ContainerSpaceComponent implements OnInit {
   checkvalue(event: any, element: any) {
     let data_att = event.target.getAttribute('data-index');
     let data_i = event.target.getAttribute('data-i');
-    const trueValue = element[this.itemJson[0].location_value][data_i].content[data_att].input.valid[0];
-    console.log(trueValue)
-    let maxLength = trueValue.length;
-    if (event.target.value == null) {
-      event.target.classList.add('wrong');
-      event.target.classList.remove('right');
-      console.log('the value null');
-    } else if (event.target.value.length == maxLength) {
-      if (event.target.value != trueValue) {
-        event.target.classList.remove('right');
+    for (const el of element[this.itemJson[0].location_value][data_i].content[data_att].input.valid) {
+      console.log(el)
+      let maxLength = el.length;
+      if (event.target.value == null) {
         event.target.classList.add('wrong');
-        console.log('the value wrong');
-      } else {
-        event.target.classList.add('right');
-        event.target.classList.remove('wrong');
-        console.log('the value ture');
+        event.target.classList.remove('right');
+        console.log('the value null');
+      } else if (event.target.value.length == maxLength) {
+        if (event.target.value != el) {
+          event.target.classList.remove('right');
+          event.target.classList.add('wrong');
+          console.log('the value wrong');
+        } else {
+          event.target.classList.add('right');
+          event.target.classList.remove('wrong');
+          console.log('the value ture');
+        }
       }
     }
-
   }
 
   checkanswer() {
@@ -574,8 +576,25 @@ export class ContainerSpaceComponent implements OnInit {
     });
     event.target.classList.add('disable');
   }
+  setupdate(event: any) {
+    const but = document.querySelectorAll('div .button_check');
+
+    this.checkBtn = 0
+    this.chackInput = document.querySelectorAll('input');
+    this.chackInput.forEach((elem: any) => {
+      elem.value == '' ? this.checkBtn++ : false;
+    });
+
+    if (this.checkBtn == 0) {
+      this.guideCheck = true;
+      but.forEach((elem: any) => {
+        elem.classList.add('enable');
+      });
+      console.log("checkBtn = " + this.checkBtn)
+    }
+  }
   show_next(event: any) {
     event.target.classList.add('disable');
-   }
+  }
 
 }
