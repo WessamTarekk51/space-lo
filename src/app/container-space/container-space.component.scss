@@ -184,14 +184,37 @@
           }
 
         }
+
         .button_check {
-          p{
+          .try-active {
+            background-repeat: no-repeat;
+            background-size  : 100% 100%;
+            width            : 7vh;
+            height           : 7vh;
+            position         : absolute;
+            left             : 5vw;
+            top              : 5vh;
+            display          : flex;
+            justify-content  : center;
+            align-items      : center;
+
+            background-image: $bg_try;
+
+            span {
+              color: #8a0099;
+              font-size: 1.2vw;
+            }
+          }
+
+          p {
             padding-left: 14vh;
           }
-          &.disable{
-            background-image : $next_q_show;
+
+          &.disable {
+            background-image: $next_q_show;
           }
         }
+
         .show_anwser {
           right: 14vw;
         }

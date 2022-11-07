@@ -52,17 +52,20 @@ input {
 
 }
 
-.dataInput {
+
+.help {
+  width   : 0vw;
+  height  : 0vw;
   position: relative;
 
-  .help {
+  &::before {
+    content            : '';
+    background-image   : $hand;
     width              : 5vw;
     height             : 6vw;
-    background-image   : $hand;
     z-index            : 1;
     position           : absolute;
-    left               : 12vw;
-    top                : -2vw;
+
     background-size    : 100% 100%;
     background-position: center;
     background-repeat  : no-repeat;
@@ -70,19 +73,21 @@ input {
     animation          : submit .5s linear .2s infinite alternate;
   }
 
-
   @keyframes submit {
     from {
-      bottom: 12vw;
-      left  : 10vw
+      bottom: 20vw;
+      left  : -1vw
     }
 
     to {
-      bottom: -2vw;
-      left  : 9vw
+      bottom: 15vw;
+      left  : 0vw
     }
   }
 }
+
+
+
 
 
 * {

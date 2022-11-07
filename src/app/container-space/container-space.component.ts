@@ -27,7 +27,7 @@ export class ContainerSpaceComponent implements OnInit {
   guideCheck: boolean = false;
   guideAnwser: boolean = false;
   guidenext: boolean = false;
-
+  arr: any;
 
   constructor(
     private dataService: SharingDataService,
@@ -53,7 +53,11 @@ export class ContainerSpaceComponent implements OnInit {
   nextQuestion() {
     this.counter += 1;
     this.question = false;
+    this.arr = this.itemJson[0].items
+    this.shuffle(this.arr)
+    this.itemJson[0].items = this.arr
     this.questionsNumber = this.itemJson[0].items.length;
+
     if (this.questionsNumber != this.counter) {
       this.itemJson[0].items.forEach((element) => {
         element.active = false;
@@ -62,7 +66,17 @@ export class ContainerSpaceComponent implements OnInit {
     }
     // console.log(this.itemJson[0].items)
 
+  }
 
+  shuffle(a: any[]) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+    }
+    return a;
   }
 
 
@@ -123,7 +137,7 @@ export class ContainerSpaceComponent implements OnInit {
 
     // console.log("numberOfquestion = " + this.itemJson[0].numberOfquestion)
     setTimeout(() => {
-      this.helpHand = document.querySelectorAll('.dataInput .help');
+      this.helpHand = document.querySelectorAll('.help');
       let count = 0;
       this.helpHand.forEach((el: any) => {
         count++
@@ -153,7 +167,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          numOfAttempts: 3,
+          numOfAttempts: 0,
           label_up: [
             {
               content: [
@@ -183,7 +197,7 @@ export class ContainerSpaceComponent implements OnInit {
             {
               content: [
                 {
-                  parag: "350",
+                  parag: "1",
                   Length: 0,
                   input: { valid: [''], show: [''] },
                   marker: "−",
@@ -295,7 +309,7 @@ export class ContainerSpaceComponent implements OnInit {
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
-          numOfAttempts: 3,
+          numOfAttempts: 0,
           label_up: [
             {
               content: [
@@ -598,3 +612,4 @@ export class ContainerSpaceComponent implements OnInit {
   }
 
 }
+
