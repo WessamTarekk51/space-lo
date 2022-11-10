@@ -20,7 +20,8 @@ export class AppComponent {
   setInterval: any
   screenClick: number = 0
   getsound!: string;
-  sec:any
+  sec:any;
+  helpHand: any;
 
   ngOnInit() {   console.log(document.querySelectorAll('input').length) }
 
@@ -36,7 +37,7 @@ export class AppComponent {
     }, 1500)
     this.soundPlay()
 
-
+  
   }
 
   soundPlay() {

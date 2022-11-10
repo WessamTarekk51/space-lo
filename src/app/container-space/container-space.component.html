@@ -1,16 +1,14 @@
 <ng-container *ngFor="let e of  this.itemJson[0].items " >
-  <ng-container *ngIf="e.active && this.itemJson[0].items.length > 1"  >
+  <ng-container *ngIf="e.active "  >
     <div class="container-space" [ngClass]="{'active': e.active}" (click)="setupdate($event)">
-
       <div class="up_label ">
-
         <ng-container *ngFor="let data of  e.label_up[0].content; let i =index;">
           <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
           <ng-container *ngIf="data.parag ==''">
             <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e);  "
               (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="label_up" [attr.maxlength]="data.Length" [attr.data-i]="0"
               [attr.placeholder]="data.input.show">
-            <div class="help" *ngIf="i == 0"></div>
+            <div class="help"></div>
           </ng-container>
           <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
         </ng-container>
@@ -22,10 +20,9 @@
           </div>
           <div class="space_man"></div>
           <div class="body_table">
-
             <div class="button_check " (click)="checkanswer();" [ngClass]="e.numOfAttempts == 0 ? '' : 'disable'">
               <div class="button" *ngIf="guideCheck"></div>
-              <div class="try-active"><span>X{{2- e.numOfAttempts}}</span></div>
+              <div class="try-active"><span>X{{2 - e.numOfAttempts}}</span></div>
             </div>
             <!-- <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts < 1"> -->
             <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" >
@@ -76,8 +73,8 @@
         <div class="nextContent">
           <div class="character" class="show{{(counter+1)*2}}">
             <div class="buttons">
-              <button class="next" (click)="nextQuestion()"
-                *ngIf="counter !== this.itemJson[0].items.length-1"></button>
+              <!-- <button class="next" (click)="nextQuestion()" *ngIf="counter !== this.itemJson[0].items.length-1"></button> -->
+              <button class="next" (click)="nextQuestion()" *ngIf="counter !== 1"></button>
               <button class="home" (click)="home()"></button>
             </div>
           </div>

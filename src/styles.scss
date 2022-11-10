@@ -57,7 +57,7 @@ input {
   width   : 0vw;
   height  : 0vw;
   position: relative;
-
+z-index: 99;
   &::before {
     content            : '';
     background-image   : $hand;
@@ -75,12 +75,12 @@ input {
 
   @keyframes submit {
     from {
-      bottom: 20vw;
+      bottom: -2vw;
       left  : -1vw
     }
 
     to {
-      bottom: 15vw;
+      bottom: -1vw;
       left  : 0vw
     }
   }

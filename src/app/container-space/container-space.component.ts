@@ -37,37 +37,34 @@ export class ContainerSpaceComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
-    this.nextQuestion();
+    this.generateLo();
     this.dataService.setIndex(this.counter);
     this.questionsNumber = this.dataService.getIndex();
+  }
 
+  generateLo(){
+    this.arr =  this.shuffle( this.itemJson[0].items)
+    this.itemJson[0].items = this.arr;
+    this.nextQuestion();
     this.maxLength();
+    this.helpHand = document.querySelectorAll('.help');
+    let count = 0;
+
+    setTimeout(() => {
+      this.helpHand.forEach((el: any) => {
+        console.log(count)
+        count++
+
+        if (count != 1) {
+
+          el.classList.remove('help');
+        }
+      })
+    }, 1000);
 
   }
-
-  onBlur(): void {
-    console.log('Focus Is Lost for this Element');
-  }
-
-  nextQuestion() {
-    this.counter += 1;
-    this.question = false;
-    this.arr = this.itemJson[0].items
-    this.shuffle(this.arr)
-    this.itemJson[0].items = this.arr
-    this.questionsNumber = this.itemJson[0].items.length;
-
-    if (this.questionsNumber != this.counter) {
-      this.itemJson[0].items.forEach((element) => {
-        element.active = false;
-      });
-      this.itemJson[0].items[this.counter].active = true;
-    }
-    // console.log(this.itemJson[0].items)
-
-  }
-
   shuffle(a: any[]) {
     var j, x, i;
     for (i = a.length - 1; i > 0; i--) {
@@ -78,6 +75,23 @@ export class ContainerSpaceComponent implements OnInit {
     }
     return a;
   }
+
+
+  nextQuestion() {
+    this.counter += 1;
+    this.question = false;
+    this.questionsNumber = this.itemJson[0].items.length;
+    if (this.questionsNumber != this.counter) {
+      this.itemJson[0].items.forEach((element) => {
+        element.active = false;
+      });
+      this.itemJson[0].items[this.counter].active = true;
+    }
+    console.log(this.arr)
+
+
+  }
+
 
 
 
@@ -136,16 +150,7 @@ export class ContainerSpaceComponent implements OnInit {
 
 
     // console.log("numberOfquestion = " + this.itemJson[0].numberOfquestion)
-    setTimeout(() => {
-      this.helpHand = document.querySelectorAll('.help');
-      let count = 0;
-      this.helpHand.forEach((el: any) => {
-        count++
-        if (count != 1) {
-          el.classList.remove('help');
-        }
-      })
-    }, 1);
+
   }
 
 
@@ -163,7 +168,7 @@ export class ContainerSpaceComponent implements OnInit {
       location_value: '',
       items: [
         {
-          active: true,
+          active: false,
           id: 1,
           counterCorrect: 0,
           numberOfquestion: 0,
@@ -177,7 +182,7 @@ export class ContainerSpaceComponent implements OnInit {
                   input: { valid: ['1'], show: [''] },
                   marker: '÷',
                 }, {
-                  parag: '2',
+                  parag: '',
                   Length: 0,
                   input: { valid: ['2'], show: [''] },
                   marker: '=',
@@ -203,19 +208,19 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['1'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['2'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['3'], show: [''] },
                   marker: "-",
@@ -231,7 +236,7 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['4'], show: [''] },
                   marker: "−",
@@ -243,7 +248,7 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['6'], show: [''] },
                   marker: "-",
@@ -259,19 +264,19 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "1",
                   Length: 0,
                   input: { valid: ['6'], show: [''] },
                   marker: "-",
@@ -283,7 +288,7 @@ export class ContainerSpaceComponent implements OnInit {
             {
               content: [
                 {
-                  parag: '',
+                  parag: '1',
                   Length: 0,
                   input: { valid: ['1'], show: [''] },
                   marker: '=',
@@ -294,7 +299,7 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: '÷',
 
                 }, {
-                  parag: '',
+                  parag: '1',
                   Length: 0,
                   input: { valid: ['3'], show: [''] },
                   marker: '',
@@ -345,19 +350,19 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['1'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['2'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['3'], show: [''] },
                   marker: "-",
@@ -373,19 +378,19 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['6'], show: [''] },
                   marker: "-",
@@ -401,19 +406,19 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['4'], show: [''] },
                   marker: "−",
                   line: false
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['5'], show: [''] },
                   marker: "-",
                   line: true
                 }, {
-                  parag: "",
+                  parag: "2",
                   Length: 0,
                   input: { valid: ['6'], show: [''] },
                   marker: "-",
@@ -425,7 +430,7 @@ export class ContainerSpaceComponent implements OnInit {
             {
               content: [
                 {
-                  parag: '',
+                  parag: '2',
                   Length: 0,
                   input: { valid: ['1'], show: [''] },
                   marker: '=',
@@ -436,7 +441,7 @@ export class ContainerSpaceComponent implements OnInit {
                   marker: '÷',
 
                 }, {
-                  parag: '',
+                  parag: '2',
                   Length: 0,
                   input: { valid: ['3'], show: [''] },
                   marker: '',
@@ -450,6 +455,8 @@ export class ContainerSpaceComponent implements OnInit {
       ],
     },
   ];
+
+
 
 
 
@@ -490,22 +497,18 @@ export class ContainerSpaceComponent implements OnInit {
     let data_att = event.target.getAttribute('data-index');
     let data_i = event.target.getAttribute('data-i');
     for (const el of element[this.itemJson[0].location_value][data_i].content[data_att].input.valid) {
-      console.log(el)
+      console.log("el = " + el)
       let maxLength = el.length;
-      if (event.target.value == null) {
-        event.target.classList.add('wrong');
-        event.target.classList.remove('right');
-        console.log('the value null');
-      } else if (event.target.value.length == maxLength) {
-        if (event.target.value != el) {
-          event.target.classList.remove('right');
-          event.target.classList.add('wrong');
-          console.log('the value wrong');
-        } else {
-          event.target.classList.add('right');
-          event.target.classList.remove('wrong');
-          console.log('the value ture');
-        }
+      if (el === event.target.value) {
+        console.log(el)
+        console.log(event.target.value)
+
+        event.target.classList.add('right')
+        event.target.classList.remove('wrong')
+        break
+      } else {
+        event.target.classList.remove('right')
+        event.target.classList.add('wrong')
       }
     }
   }
@@ -530,13 +533,13 @@ export class ContainerSpaceComponent implements OnInit {
       });
 
       this.itemJson[0].items[this.counter].counterCorrect = this.count
-      this.itemJson[0].items[this.counter].numOfAttempts--
+
       this.falseBox = document.querySelectorAll('.active .wrong');
 
       this.falseBox.forEach((el: any) => {
         el.classList.remove('true');
         el.classList.add('false');
-
+        this.itemJson[0].items[this.counter].numOfAttempts++
       });
 
       let input_count = document.querySelectorAll('input').length;
@@ -560,10 +563,7 @@ export class ContainerSpaceComponent implements OnInit {
 
 
 
-  home() {
-    // this.clickBtn.play()
-    location.reload()
-  }
+
   show_anwser(event: any) {
     // console.log(this.showNext)
     this.guideAnwser = false
@@ -611,5 +611,9 @@ export class ContainerSpaceComponent implements OnInit {
     event.target.classList.add('disable');
   }
 
+  home() {
+    // this.clickBtn.play()
+    location.reload()
+  }
 }
 
