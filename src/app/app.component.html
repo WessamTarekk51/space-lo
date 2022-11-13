@@ -1,8 +1,4 @@
-<div class="bg"  (click)="setclick()">
-  <button *ngIf="startLo" id="start-button" (click)="startLo = !startLo; start($event)"></button>
 
-  <audio class="music" (click)="muteMusic()" [ngClass]="music ? 'play' : 'mute'">
-  </audio>
-  <app-container-space  *ngIf="!startLo"></app-container-space>
+  <app-container-space  ></app-container-space>
 
-</div>
+

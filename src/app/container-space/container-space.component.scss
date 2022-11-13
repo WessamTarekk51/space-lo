@@ -144,30 +144,30 @@
           height           : 13vh;
           background-image : $next_q_show;
           z-index          : 9;
+          pointer-events: none;
 
           &.enable {
             background-image: $button-check;
+            pointer-events: auto;
+
           }
 
           .button {
             position: relative;
-
-            &::after {
-              content            : '';
-              width              : 5vw;
-              height             : 6vw;
-              background-image   : $hand;
-              z-index            : 1;
-              position           : absolute;
-              left               : 0vw;
-              top                : -5vw;
-              background-size    : 100% 100%;
-              background-position: center;
-              background-repeat  : no-repeat;
-              transform          : rotate(-114deg);
-              animation          : button_check .5s linear .2s infinite alternate;
-
-            }
+          }
+          .hand {
+            width              : 5vw;
+            height             : 6vw;
+            background-image   : $hand;
+            z-index            : 1;
+            position           : absolute;
+            left               : 0vw;
+            top                : -5vw;
+            background-size    : 100% 100%;
+            background-position: center;
+            background-repeat  : no-repeat;
+            transform          : rotate(-114deg);
+            animation          : button_check .5s linear .2s infinite alternate;
           }
 
 
@@ -439,5 +439,79 @@
     z-index                : 2;
     pointer-events         : none;
     display                : none;
+  }
+}
+
+
+.bg {
+  width              : 100%;
+  height             : 100vh;
+  background-position: center;
+  background-repeat  : no-repeat;
+  background-size    : cover;
+  background-image   : $bg-background;
+  @include flex-center;
+  position: relative;
+
+
+
+
+  &::after {
+    content          : '';
+    position         : absolute;
+    color            : white;
+    right            : 0;
+    top              : 1vh;
+    background-image : $logo;
+    background-size  : contain;
+    width            : 9vh;
+    height           : 7vh;
+    background-repeat: no-repeat;
+  }
+
+
+  #start-button {
+    height             : 35vh;
+    width              : 35vh;
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : 100% 100%;
+    background-image   : $but-start-background;
+    animation          : zoom 30s infinite;
+    -webkit-animation  : zoom 2.5s infinite ease-in-out;
+    cursor             : pointer;
+    background-color   : transparent;
+    border             : 0;
+
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+
+  50% {
+    transform: scale(1) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+}
+
+
+.music {
+  position         : absolute;
+  left             : 1vh;
+  top              : 1vh;
+  background-size  : contain;
+  width            : 9vh;
+  height           : 9vh;
+  background-repeat: no-repeat;
+  background-image : $music;
+
+  &.mute {
+    background-image: $mute;
   }
 }

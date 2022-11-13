@@ -1,87 +1,93 @@
-<ng-container *ngFor="let e of  this.itemJson[0].items " >
-  <ng-container *ngIf="e.active "  >
-    <div class="container-space" [ngClass]="{'active': e.active}" (click)="setupdate($event)">
-      <div class="up_label ">
-        <ng-container *ngFor="let data of  e.label_up[0].content; let i =index;">
-          <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
-          <ng-container *ngIf="data.parag ==''">
-            <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e);  "
-              (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="label_up" [attr.maxlength]="data.Length" [attr.data-i]="0"
-              [attr.placeholder]="data.input.show">
-            <div class="help"></div>
-          </ng-container>
-          <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
-        </ng-container>
-      </div>
-      <div class="center">
-        <div id="table">
-          <div class="upper_table">
-
-          </div>
-          <div class="space_man"></div>
-          <div class="body_table">
-            <div class="button_check " (click)="checkanswer();" [ngClass]="e.numOfAttempts == 0 ? '' : 'disable'">
-              <div class="button" *ngIf="guideCheck"></div>
-              <div class="try-active"><span>X{{2 - e.numOfAttempts}}</span></div>
-            </div>
-            <!-- <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts < 1"> -->
-            <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" >
-              <!-- <div class="button" *ngIf="!guideAnwser"></div> -->
-            </div>
-            <!-- <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext" *ngIf="showNext"> -->
-            <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext">
-              <!-- <div class="button" *ngIf="!guidenext"></div> -->
-            </div>
-            <div class="inner_table">
-              <ng-container *ngFor="let content of  e.inner_table; let index =index;">
-                <div class="table_question" [ngStyle]="{'width': 'calc(100% / ' + e.inner_table.length + ')' }">
-                  <ng-container *ngFor="let data of content.content; let i =index;">
-                    <p *ngIf="data.parag !='' && !data.line" innerHTML="{{data.parag}}">
-                    </p>
-                    <div *ngIf="data.parag =='' && !data.line" class="dataInput">
-                      <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
-                        (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="inner_table" [attr.maxlength]="data.Length"
-                        [attr.data-i]="index" [attr.placeholder]="data.input.show">
-                        <div class="help" *ngIf="i == 0"></div>
-                    </div>
-
-                    <div class="line" *ngIf="data.line">
-                      <span innerHTML="{{data.marker}}"></span>
-                    </div>
-                  </ng-container>
-                  <div class="border_h" *ngIf="e.inner_table.length -1 != index "></div>
-                </div>
+<div class="bg" (click)="setclick()">
+  <button *ngIf="startLo" id="start-button" (click)="startLo = !startLo; start($event)"></button>
+  <ng-container *ngIf="!startLo" >
+      <div (click)="muteMusic()" class="music" [ngClass]="music ? 'play' : 'mute'"></div>
+      <ng-container *ngFor="let e of  this.itemJson[0].items ">
+        <ng-container *ngIf="e.active ">
+          <div class="container-space" [ngClass]="{'active': e.active}">
+            <!-- (click)="setupdate($event)" -->
+            <div class="up_label ">
+              <ng-container *ngFor="let data of  e.label_up[0].content; let i =index;">
+                <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
+                <ng-container *ngIf="data.parag ==''">
+                  <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e);  "
+                    (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="label_up"
+                    [attr.maxlength]="data.Length" [attr.data-i]="0" [attr.placeholder]="data.input.show">
+                  <div class="help" *ngIf="i == 0 && counter == 0"></div>
+                </ng-container>
+                <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
               </ng-container>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="down_label">
-        <!-- <div class="inner_label_1"><p>00000000</p></div> -->
-        <ng-container *ngFor="let data of  e.label_down[0].content; let i =index;">
-          <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
-          <div *ngIf="data.parag ==''" class="dataInput">
-            <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
-              (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="label_down" [attr.maxlength]="data.Length" [attr.data-i]="0"
-              [attr.placeholder]="data.input.show">
-            <div class="help" *ngIf="i == 0"></div>
-          </div>
-          <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
-        </ng-container>
-      </div>
-      <div *ngIf="question">
-        <div class="nextContent">
-          <div class="character" class="show{{(counter+1)*2}}">
-            <div class="buttons">
-              <!-- <button class="next" (click)="nextQuestion()" *ngIf="counter !== this.itemJson[0].items.length-1"></button> -->
-              <button class="next" (click)="nextQuestion()" *ngIf="counter !== 1"></button>
-              <button class="home" (click)="home()"></button>
+            <div class="center">
+              <div id="table">
+                <div class="upper_table">
+                </div>
+                <div class="space_man"></div>
+                <div class="body_table">
+                  <div class="button_check" (click)="checkanswer();">
+                    <div class="hand" *ngIf="checkhand && counter == 0"></div>
+                    <div class="try-active"><span>X{{2 - this.numOfAttempts}}</span></div>
+                  </div>
+                  <!-- <div class="show_anwser" (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser" *ngIf="e.numOfAttempts < 1"> -->
+                  <div class="show_anwser"
+                    (click)="show_anwser($event); showNext = !showNext ;  guideAnwser = !guideAnwser">
+                    <div class="hand" *ngIf="answerhand && counter == 0"></div>
+                  </div>
+                  <!-- <div class="show_next" (click)="show_next($event) ;  guidenext = !guidenext" *ngIf="showNext"> -->
+                  <div class="show_next" (click)="show_next() ;">
+                    <div class="hand" *ngIf="nexthand && counter == 0"></div>
+                  </div>
+                  <div class="inner_table">
+                    <ng-container *ngFor="let content of  e.inner_table; let index =index;">
+                      <div class="table_question" [ngStyle]="{'width': 'calc(100% / ' + e.inner_table.length + ')' }">
+                        <ng-container *ngFor="let data of content.content; let i =index;">
+                          <p *ngIf="data.parag !='' && !data.line" innerHTML="{{data.parag}}">
+                          </p>
+                          <div *ngIf="data.parag =='' && !data.line" class="dataInput">
+                            <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
+                              (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="inner_table"
+                              [attr.maxlength]="data.Length" [attr.data-i]="index" [attr.placeholder]="data.input.show">
+                            <div class="help" *ngIf="i == 0 && counter == 0"></div>
+                          </div>
+
+                          <div class="line" *ngIf="data.line">
+                            <span innerHTML="{{data.marker}}"></span>
+                          </div>
+                        </ng-container>
+                        <div class="border_h" *ngIf="e.inner_table.length -1 != index "></div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="down_label">
+              <!-- <div class="inner_label_1"><p>00000000</p></div> -->
+              <ng-container *ngFor="let data of  e.label_down[0].content; let i =index;">
+                <p *ngIf="data.parag !=''" innerHTML="{{data.parag}}"></p>
+                <div *ngIf="data.parag ==''" class="dataInput">
+                  <input class="wrong  " type="text" [attr.data-index]="i" (change)="checkvalue($event,e)"
+                    (focus)="foucs($event)" (keyup)="foucsOut($event)" location-value="label_down"
+                    [attr.maxlength]="data.Length" [attr.data-i]="0" [attr.placeholder]="data.input.show">
+                  <div class="help" *ngIf="i == 0 && counter == 0"></div>
+                </div>
+                <p *ngIf="data.marker !=''" innerHTML="{{data.marker}}"></p>
+              </ng-container>
+            </div>
+            <div *ngIf="question">
+              <div class="nextContent">
+                <div class="character" class="show{{(counter+1)*2}}">
+                  <div class="buttons">
+                    <!-- <button class="next" (click)="nextQuestion()" *ngIf="counter !== this.itemJson[0].items.length-1"></button> -->
+                    <button class="next" (click)="nextQuestion()" *ngIf="counter !== 1"></button>
+                    <button class="home" (click)="home()"></button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
+        </ng-container>
+      </ng-container>
   </ng-container>
 
-</ng-container>
+</div>
