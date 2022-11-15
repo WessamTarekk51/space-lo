@@ -45,7 +45,7 @@ export class ContainerSpaceComponent implements OnInit {
   rightAnswer = new Audio()
   wrongAnswer = new Audio()
   clickBtn = new Audio()
-  click:boolean = false
+  click: boolean = false
   btCheck: any
   btAnswer: any
   btNext: any
@@ -54,7 +54,9 @@ export class ContainerSpaceComponent implements OnInit {
   answerhand: boolean = false
   nexthand: boolean = false
   b: any
-
+  result: number = 0
+  finish: any
+  loQuestion: number = 2
   constructor(
     private dataService: SharingDataService,
     private router: Router,
@@ -85,7 +87,160 @@ export class ContainerSpaceComponent implements OnInit {
                 {
                   parag: '',
                   Length: 0,
-                  input: { valid: ['11','121' , '1'], show: [''] },
+                  input: { valid: ['11', '121', '1'], show: [''] },
+                  marker: '÷',
+                },
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '=',
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '',
+                },
+              ],
+            },
+          ],
+          inner_table: [
+            {
+              content: [
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: true,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: false,
+                },
+              ],
+            },
+            {
+              content: [
+                {
+                  parag: '350',
+                  Length: 0,
+                  input: { valid: [''], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: true,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: false,
+                },
+              ],
+            },
+            {
+              content: [
+                {
+                  parag: '350',
+                  Length: 0,
+                  input: { valid: [''], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '−',
+                  line: false,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: true,
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '-',
+                  line: false,
+                },
+              ],
+            },
+          ],
+          label_down: [
+            {
+              content: [
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '=',
+                },
+                {
+                  parag: '2',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '÷',
+                },
+                {
+                  parag: '1',
+                  Length: 0,
+                  input: { valid: ['1'], show: [''] },
+                  marker: '',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          active: false,
+          id: 1,
+          counterCorrect: 0,
+          numberOfquestion: 0,
+          numOfAttempts: 0,
+          label_up: [
+            {
+              content: [
+                {
+                  parag: '',
+                  Length: 0,
+                  input: { valid: ['11', '121', '1'], show: [''] },
                   marker: '÷',
                 },
                 {
@@ -249,7 +404,7 @@ export class ContainerSpaceComponent implements OnInit {
     this.muteMusic()
     setTimeout(() => {
       this.sound.src =
-      '/assets/audios/Q/Q' + this.itemJson[0].items[this.counter].id + '.mp3'
+        '/assets/audios/Q/Q' + this.itemJson[0].items[this.counter].id + '.mp3'
       this.sound.play()
     }, 1500)
     this.soundPlay()
@@ -267,7 +422,7 @@ export class ContainerSpaceComponent implements OnInit {
   }
 
   soundPlay() {
-    console.log("this.counter"+this.counter)
+    console.log('this.counter' + this.counter)
     this.sound.addEventListener('loadedmetadata', (event) => {
       // console.log(this.sound.duration)
       this.sec = this.sound.duration + 18
@@ -279,7 +434,9 @@ export class ContainerSpaceComponent implements OnInit {
         setTimeout(() => {
           // this.sound.src = '/assets/audios/Q/Q0.mp3'
           this.sound.src =
-          '/assets/audios/Q/Q' + this.itemJson[0].items[this.counter].id + '.mp3'
+            '/assets/audios/Q/Q' +
+            this.itemJson[0].items[this.counter].id +
+            '.mp3'
           this.sound.play()
           this.screenClick = 0
         }, 1500)
@@ -293,7 +450,7 @@ export class ContainerSpaceComponent implements OnInit {
     this.sound.currentTime = 0
     clearInterval(this.setInterval)
     this.screenClick = 0
-    if(this.click == false  ){
+    if (this.click == false) {
       this.soundPlay()
     }
   }
@@ -328,7 +485,7 @@ export class ContainerSpaceComponent implements OnInit {
   nextQuestion() {
     this.counter += 1
     this.question = false
-    this.click=false
+    this.click = false
 
     this.questionsNumber = this.itemJson[0].items.length
     if (this.questionsNumber != this.counter) {
@@ -344,7 +501,7 @@ export class ContainerSpaceComponent implements OnInit {
       this.helpHand.forEach((el: any) => {
         el.classList.remove('false')
       })
-    },100)
+    }, 100)
   }
 
   maxLength() {
@@ -434,19 +591,15 @@ export class ContainerSpaceComponent implements OnInit {
         elem.classList.add('enable')
       })
       console.log('numOfAttempts = ' + this.numOfAttempts)
-    }
-    else{
-
-        but.forEach((elem: any) => {
-          elem.classList.remove('enable')
-        })
-        this.checkhand = false
-
+    } else {
+      but.forEach((elem: any) => {
+        elem.classList.remove('enable')
+      })
+      this.checkhand = false
     }
   }
 
   checkvalue(event: any, element: any) {
-
     let data_att = event.target.getAttribute('data-index')
     let data_i = event.target.getAttribute('data-i')
     for (const el of element[this.itemJson[0].location_value][data_i].content[
@@ -466,7 +619,6 @@ export class ContainerSpaceComponent implements OnInit {
         event.target.classList.add('wrong')
       }
     }
-
   }
 
   checkanswer() {
@@ -497,10 +649,10 @@ export class ContainerSpaceComponent implements OnInit {
     })
 
     if (this.falseBox.length === 0) {
-    this.numOfAttempts -= 1
+      this.numOfAttempts -= 1
       this.rightAnswer.play()
       this.question = true
-      this.click= true
+      this.click = true
       // this.btCheck[0]?.classList.add('pointer-none')
     } else {
       if (this.numOfAttempts == 1) {
@@ -521,7 +673,6 @@ export class ContainerSpaceComponent implements OnInit {
     this.nexthand = true
     this.click = true
 
-
     this.btAnswer[0]?.classList.remove('enable')
     this.btNext[0]?.classList.add('enable')
 
@@ -532,23 +683,23 @@ export class ContainerSpaceComponent implements OnInit {
         : console.log()
 
       this.itemJson[0].items.forEach((elem, i) => {
-        if(elem.active){
-        elem.label_up.forEach((elementup, i) => {
-          elementup.content.forEach((element) => {
-            element.input.show = element.input.valid[0]
+        if (elem.active) {
+          elem.label_up.forEach((elementup, i) => {
+            elementup.content.forEach((element) => {
+              element.input.show = element.input.valid[0]
+            })
           })
-        })
-        elem.inner_table.forEach((elementtable, i) => {
-          elementtable.content.forEach((element) => {
-            element.input.show = element.input.valid[0]
+          elem.inner_table.forEach((elementtable, i) => {
+            elementtable.content.forEach((element) => {
+              element.input.show = element.input.valid[0]
+            })
           })
-        })
-        elem.label_down.forEach((elementdown, i) => {
-          elementdown.content.forEach((element) => {
-            element.input.show = element.input.valid[0]
+          elem.label_down.forEach((elementdown, i) => {
+            elementdown.content.forEach((element) => {
+              element.input.show = element.input.valid[0]
+            })
           })
-        })
-      }
+        }
       })
     })
     event.target.classList.add('disable')
@@ -575,11 +726,33 @@ export class ContainerSpaceComponent implements OnInit {
       })
       console.log('checkBtn = ' + this.checkBtn)
     }
-
   }
 
   show_next() {
     this.nexthand = false
     this.question = true
+  }
+  calculate() {
+    this.result = 0
+    this.itemJson[0].items.forEach((el) => {
+      if (el.counterCorrect == el.numberOfquestion) {
+        this.result += 1 / el.numOfAttempts
+      }
+    })
+    this.finish = (this.result * 100) / this.loQuestion
+    console.log(this.finish)
+
+    if (this.finish >= 1 && this.finish <= 50) {
+      console.log('ضعيف')
+    }
+    if (this.finish >= 51 && this.finish <= 64) {
+      console.log('مقبول')
+    }
+    if (this.finish >= 65 && this.finish <= 84) {
+      console.log('جيد ')
+    }
+    if (this.finish >= 85 && this.finish <= 100) {
+      console.log('يفوق التوقعات ')
+    }
   }
 }

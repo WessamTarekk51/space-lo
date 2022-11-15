@@ -79,7 +79,7 @@
                 <div class="character" class="show{{(counter+1)*2}}">
                   <div class="buttons">
                     <!-- <button class="next" (click)="nextQuestion()" *ngIf="counter !== this.itemJson[0].items.length-1"></button> -->
-                    <button class="next" (click)="nextQuestion()" *ngIf="counter !== 1"></button>
+                    <button class="next" (click)="nextQuestion();calculate()" *ngIf="counter !== 1"></button>
                     <button class="home" (click)="home()"></button>
                   </div>
                 </div>
